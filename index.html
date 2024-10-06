@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veddet Technologies - Industry-Leading Gasket Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        /* Reset and Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        header .logo {
+            font-size: 1.8em;
+            font-family: 'Playfair Display', serif;
+            color: #1a5f7a;
+            font-weight: 700;
+        }
+
+        header nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        header nav a {
+            font-weight: 500;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #1a5f7a;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-icon {
+            display: none;
+            font-size: 1.8em;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            header nav {
+                display: none;
+                flex-direction: column;
+                background-color: #fff;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                padding: 10px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            header nav a {
+                padding: 15px;
+                text-align: center;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+            }
+
+            .mobile-menu-icon {
+                display: block;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5em;
+            color: #1a5f7a;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #1a5f7a;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #13455a;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2em;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #1a5f7a;
+            margin-bottom: 60px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* About Us Section */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            color: #333;
+        }
+
+        .about-content h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            color: #1a5f7a;
+        }
+
+        .about-content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 10px;
+            width: 300px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 70px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #1a5f7a;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                width: 100%;
+            }
+        }
+
+        /* Innovation Section */
+        .innovation {
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .innovation-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .innovation h2 {
+            color: #1a5f7a;
+            margin-bottom: 30px;
+        }
+
+        .innovation p {
+            margin-bottom: 40px;
+        }
+
+        .innovation-chart {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: #fff;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        .testimonial-slide p {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .testimonial-slide h4 {
+            color: #1a5f7a;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #f9f9f9;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .contact-form button {
+            padding: 12px 25px;
+            background: #1a5f7a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #13455a;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a5f7a;
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer p {
+            font-size: 0.9em;
+        }
+
+        /* Chatbot */
+        /* Chatbot Styles */
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1a5f7a;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #chatbot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #chatbot-icon {
+            width: 60%;
+            height: 60%;
+            transition: all 0.3s ease;
+        }
+
+        #chatbot.open #chatbot-icon {
+            transform: rotate(360deg);
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            z-index: 1002;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-window.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chatbot-header {
+            background: #1a5f7a;
+            padding: 15px;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bot-message,
+        .user-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+
+        .bot-message {
+            background-color: #e6f2ff;
+            align-self: flex-start;
+        }
+
+        .user-message {
+            background-color: #dcf8c6;
+            align-self: flex-end;
+        }
+
+        .chatbot-input {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .chatbot-input input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Veddet Technologies</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#innovation">Innovation</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="mobile-menu-icon" onclick="toggleMobileMenu()">☰</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Leading the Industry in Gasket Solutions</h1>
+            <p>Experience unmatched quality and innovation with Veddet Technologies.</p>
+            <a href="#contact" class="cta-button">Get a Quote</a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>About Veddet Technologies</h2>
+            <p>At Veddet Technologies, we are pioneers in gasket manufacturing, setting industry standards through
+                relentless innovation and exceptional quality. Our commitment to excellence has positioned us as the
+                trusted partner for leading businesses worldwide. With over 30 years of experience, we combine
+                cutting-edge technology with expert craftsmanship to deliver solutions that exceed expectations.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title">Our Premier Services</h2>
+        <div class="services">
+            <div class="service-card">
+                <img src="product1.jpg" alt="Custom Gasket Design">
+                <h3>Custom Gasket Design</h3>
+                <p>Delivering bespoke gasket solutions engineered to meet your unique requirements with precision and
+                    efficiency.</p>
+            </div>
+            <div class="service-card">
+                <img src="product2.jpg" alt="Advanced Materials">
+                <h3>Advanced Materials</h3>
+                <p>Utilizing cutting-edge materials to enhance performance, durability, and efficiency in extreme
+                    conditions.</p>
+            </div>
+            <div class="service-card">
+                <img src="product3.png" alt="Innovative Manufacturing">
+                <h3>Innovative Manufacturing</h3>
+                <p>Employing state-of-the-art technologies to produce gaskets that exceed industry benchmarks and
+                    regulatory standards.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation Section -->
+    <section class="innovation" id="innovation">
+        <div class="innovation-content">
+            <h2 class="section-title">Driving Industry Innovation</h2>
+            <p>At Veddet Technologies, we're committed to pushing the boundaries of gasket technology. Our continuous
+                investment in research and development has led to breakthrough innovations that set new industry
+                standards.</p>
+            <div class="innovation-chart">
+                <canvas id="innovationChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">Client Testimonials</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial-slide active">
+                <p>"Veddet Technologies has consistently delivered exceptional gasket solutions that have significantly
+                    improved our operations and reduced downtime."</p>
+                <h4>- John Doe, CEO, Global Manufacturing Inc.</h4>
+            </div>
+            <div class="testimonial-slide">
+                <p>"Their expertise and commitment to quality make them an invaluable partner in our supply chain.
+                    Veddet's custom solutions have helped us achieve unprecedented efficiency."</p>
+                <h4>- Jane Smith, CTO, Aerospace Solutions Ltd.</h4>
+            </div>
+            <div class="testimonial-slide">
+                <p>"We trust Veddet Technologies for their innovative approach and outstanding customer service. Their
+                    gaskets have withstood the most demanding conditions in our industry."</p>
+                <h4>- Mark Johnson, Operations Manager, Automotive Excellence Co.</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="contact-form">
+            <form action="#" method="post">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="company">Company *</label>
+                <input type="text" id="company" name="company" required>
+
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+    </section>
+
+    <div id="chatbot">
+        <img id="chatbot-icon" src="bot.png" alt="Chatbot Icon">
+    </div>
+
+    <div class="chatbot-window">
+        <div class="chatbot-header">Chat with Us</div>
+        <div class="chatbot-messages">
+            <!-- Initial bot message will be added here by JavaScript -->
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Type your message..." />
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Veddet Technologies. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const nav = document.querySelector('header nav');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Hero Background Slideshow
+        const hero = document.querySelector('.hero');
+        const heroImages = [
+            'gasket1.png',
+            'gasket2.png',
+            'gasket3.png'
+        ];
+        const heroColors = ['#1a5f7a', '#13455a', '#0d2d3a']; // Array for background color transitions
+        let heroIndex = 0;
+
+        function changeHeroBackground() {
+            hero.style.backgroundImage = `url('${heroImages[heroIndex]}')`;
+            hero.style.backgroundColor = heroColors[heroIndex]; // Change the background color
+            heroIndex = (heroIndex + 1) % heroImages.length;
+        }
+
+        setInterval(changeHeroBackground, 5000); // Change background every 5 seconds
+        changeHeroBackground(); // Initial call
+
+        // Testimonial Slider
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName('testimonial-slide');
+
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].classList.add('active');
+            setTimeout(showSlides, 5000); // Change slide every 5 seconds
+        }
+
+        showSlides(); // Initial call
+
+        // Innovation Chart
+        const ctx = document.getElementById('innovationChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'R&D Investment (in millions $)',
+                    data: [2.5, 3.2, 4.1, 5.3, 6.8],
+                    backgroundColor: [
+                        'rgba(26, 95, 122, 0.7)',
+                        'rgba(26, 95, 122, 0.8)',
+                        'rgba(26, 95, 122, 0.9)',
+                        'rgba(26, 95, 122, 1)',
+                        'rgba(19, 69, 90, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(26, 95, 122, 1)',
+                        'rgba(26, 95, 122, 1)',
+                        'rgba(26, 95, 122, 1)',
+                        'rgba(26, 95, 122, 1)',
+                        'rgba(19, 69, 90, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Investment (millions $)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Veddet Technologies R&D Investment',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission handling
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for your message. We will get back to you soon!');
+            form.reset();
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.service-card, .innovation-chart, .contact-form').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Chatbot JavaScript
+        const chatbotIcon = document.getElementById('chatbot');
+        const chatbotWindow = document.querySelector('.chatbot-window');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotMessages = document.querySelector('.chatbot-messages');
+
+        let isChatbotOpen = false;
+
+        function toggleChatbot() {
+            isChatbotOpen = !isChatbotOpen;
+            chatbotIcon.classList.toggle('open');
+            chatbotWindow.classList.toggle('active');
+            chatbotWindow.style.display = isChatbotOpen ? 'flex' : 'none';
+
+            if (isChatbotOpen && chatbotMessages.children.length === 0) {
+                addBotMessage("Hello! How can I assist you today with our gasket solutions?");
+            }
+        }
+
+        chatbotIcon.addEventListener('click', toggleChatbot);
+
+        function addMessage(content, isUser = false) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = content;
+            messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function addBotMessage(content) {
+            addMessage(content, false);
+        }
+
+        function addUserMessage(content) {
+            addMessage(content, true);
+        }
+
+        chatbotInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && chatbotInput.value.trim() !== '') {
+                const userMessage = chatbotInput.value;
+                addUserMessage(userMessage);
+                chatbotInput.value = '';
+
+                // Simulated response
+                setTimeout(() => {
+                    addBotMessage("Thank you for your message. Our team will get back to you shortly with more information about our gasket solutions.");
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>
